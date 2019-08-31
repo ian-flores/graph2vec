@@ -102,6 +102,7 @@ def main(args):
     :param args: Object with the arguments.
     """
     graphs = glob.glob(args.input_path + "*.gml")
+    print(graphs)
     print("\nFeature extraction started.\n")
     document_collections = Parallel(n_jobs = args.workers)(delayed(feature_extractor)(g, args.wl_iterations) for g in tqdm(graphs))
     print("\nOptimization started.\n")
