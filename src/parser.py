@@ -12,7 +12,7 @@ def parameter_parser():
     parser.add_argument("--input-path",
                         nargs = "?",
                         default = "./dataset/",
-	                help = "Input folder with jsons.")
+	                help = "Input folder with jsons or graphmls.")
 
     parser.add_argument("--output-path",
                         nargs = "?",
