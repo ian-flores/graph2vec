@@ -88,7 +88,7 @@ def save_embedding(output_path, model, files, dimensions):
     """
     out = []
     for f in files:
-        identifier = f.split("/")[-1].strip(".json")
+        identifier = f.split("/")[-1].strip(".gml")
         out.append([int(identifier)] + list(model.docvecs["g_"+identifier]))
 
     out = pd.DataFrame(out,columns = ["type"] +["x_" +str(dimension) for dimension in range(dimensions)])
@@ -100,7 +100,7 @@ def main(args):
     Main function to read the graph list, extract features, learn the embedding and save it.
     :param args: Object with the arguments.
     """
-    graphs = glob.glob(args.input_path + "*.json")
+    graphs = glob.glob(args.input_path + "*.gml")
     print("\nFeature extraction started.\n")
     document_collections = Parallel(n_jobs = args.workers)(delayed(feature_extractor)(g, args.wl_iterations) for g in tqdm(graphs))
     print("\nOptimization started.\n")
