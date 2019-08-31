@@ -59,14 +59,9 @@ def dataset_reader(path):
     :return features: Features hash table.
     :return name: Name of the graph.
     """
-    name = path.strip(".json").split("/")[-1]
-    data = json.load(open(path))
-    graph = nx.from_edgelist(data["edges"])
-
-    if "features" in data.keys():
-        features = data["features"]
-    else:
-        features = nx.degree(graph)
+    name = path.strip(".gml").split("/")[-1]
+    graph = nx.read_gml(name)
+    features = nx.degree(graph)
 
     features = {int(k):v for k,v, in features.items()}
     return graph, features, name
