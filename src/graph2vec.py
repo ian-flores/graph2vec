@@ -64,6 +64,7 @@ def dataset_reader(path):
     features = nx.degree(graph)
 
     features = {int(k):v for k,v, in features.items()}
+    print(name)
     return graph, features, name
 
 def feature_extractor(path, rounds):
