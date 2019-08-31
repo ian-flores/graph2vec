@@ -60,11 +60,10 @@ def dataset_reader(path):
     :return name: Name of the graph.
     """
     name = path.strip(".gml").split("/")[-1]
-    graph = nx.read_gml(name)
+    graph = nx.read_gml(path)
     features = nx.degree(graph)
 
     features = {int(k):v for k,v, in features.items()}
-    print(name)
     return graph, features, name
 
 def feature_extractor(path, rounds):
@@ -102,7 +101,6 @@ def main(args):
     :param args: Object with the arguments.
     """
     graphs = glob.glob(args.input_path + "*.gml")
-    print(graphs)
     print("\nFeature extraction started.\n")
     document_collections = Parallel(n_jobs = args.workers)(delayed(feature_extractor)(g, args.wl_iterations) for g in tqdm(graphs))
     print("\nOptimization started.\n")
