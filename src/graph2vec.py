@@ -61,7 +61,7 @@ def dataset_reader(path):
     """
     name = path.strip(".gml").split("/")[-1]
     graph = nx.read_gml(path)
-    features = nx.degree(graph)
+    features = dict(nx.degree(graph))
 
     features = {int(k):v for k,v, in features.items()}
     return graph, features, name
